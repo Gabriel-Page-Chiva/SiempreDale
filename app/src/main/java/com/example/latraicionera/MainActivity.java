@@ -21,4 +21,5 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+    Juego juego = new Juego();
 }
