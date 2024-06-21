@@ -117,4 +117,55 @@ public class Juego {
         }
     }
 
+    //Pide otra carta
+    public void dale () {
+        Carta carta = mazo.remove(mazo.size() -1) ;
+        sumaJugador = sumaJugador + carta.getValor();
+        asesJugador = asesJugador + (carta.isAs() ? 1 : 0);
+        manoJugador.add(carta);
+
+    }
+
+    public int reducirAsJugador() {
+        while (sumaJugador > 21 && asesJugador >0 ) {
+            sumaJugador = sumaJugador - 10;
+            asesJugador = asesJugador - 1;
+        }
+        return sumaJugador;
+    }
+    public int reducirAsCrupier() {
+        while (sumaCrupier > 21 && asesCrupier >0 ) {
+            sumaCrupier = sumaCrupier - 10;
+            asesCrupier = asesCrupier - 1;
+        }
+        return sumaCrupier;
+    }
+    public void comprobarJugador (){
+        if (reducirAsJugador() > 21) {
+            //hacer que no se puede darle
+            System.out.print("no puedes darle");
+        }
+    }
+    public void comprobarCrupier (){
+        if (sumaCrupier > 17) {
+            Carta carta = mazo.remove(mazo.size()-1);
+            sumaCrupier = carta.getValor();
+            asesCrupier = asesCrupier + (carta.isAs()? 1 : 0);
+            manoCrupier.add(carta);
+
+            System.out.print("crupier para");
+        }
+    }
+    public void comprobarVictoria () {
+        if (sumaJugador > 21  || sumaJugador<sumaCrupier){
+            System.out.print("has perdido");
+        }
+        else if (sumaCrupier>21 || sumaJugador>sumaCrupier){
+            System.out.print("has ganado");
+        }
+        else if (sumaCrupier == sumaJugador);{
+            System.out.print("has empatado");
+        }
+
+    }
 }
